@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+function prompt_for_new_version() {
+  echo "Enter new version: "
+  read new_version
+  echo "New version will be: '$new_version'"
+  echo "Is this correct? (y/n)"
+  read confirm
+
+  case $confirm in
+  [Yy]*) return ;;
+  *)
+    echo "aborted"
+    exit 1
+    ;;
+  esac
+}
+
+function tag_and_push() {
+  git tag -a "$new_version" -m "Release of version $new_version"
+  git push origin master --tags
+}
+
+function create_release() {
+  gh release create
+  gh release create "v$new_version" './out/tc.zip'
+}
+
+prompt_for_new_version
+tag_and_push
+create_release

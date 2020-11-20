@@ -20,6 +20,22 @@ pip install -r requirements.txt
 
 Make changes and run `python main.py` to create the datpack in the `out/` directory. 
 
-### Contributing
+### Releasing
 
-Run `black main.py` to lint before commiting. 
+Build the datapack:
+
+```
+script/create_datpack
+```
+
+Create the zip
+
+```
+script/create_zip
+```
+
+Upload the release (requires `gh` cli tool and an authenticated user)
+
+```
+script/release
+```
